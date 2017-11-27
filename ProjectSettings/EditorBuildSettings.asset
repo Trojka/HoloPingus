@@ -4,4 +4,7 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/HoloPingus/Scenes/MainScene.unity
+    guid: 4f17bb69cb507d148ad67b62b7f59939
