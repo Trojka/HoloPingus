@@ -1096,6 +1096,7 @@ GameObject:
   - component: {fileID: 1716237121}
   - component: {fileID: 1716237120}
   - component: {fileID: 1716237119}
+  - component: {fileID: 1716237123}
   m_Layer: 9
   m_Name: Bridge
   m_TagString: Untagged
@@ -1167,6 +1168,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1716237123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1716237118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1da90b9d91de36d40a9e2d5076fef870, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1810106531
 GameObject:
   m_ObjectHideFlags: 0

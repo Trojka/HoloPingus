@@ -47,7 +47,7 @@ public class CreatureManager : MonoBehaviour
 
     Dictionary<GameObject, Creature> _walkingPinguses = new Dictionary<GameObject, Creature>();
     //Dictionary<GameObject, CreatureBehaviour> _steeringPinguses = new Dictionary<GameObject, CreatureBehaviour>();
-    List<BridgeCreationBehaviour> _bridgesCreating = new List<BridgeCreationBehaviour>();
+    //List<BridgeCreationBehaviour> _bridgesCreating = new List<BridgeCreationBehaviour>();
     List<StairCreationBehaviour> _stairsCreating = new List<StairCreationBehaviour>();
     Creature _selectedPingus;
 
@@ -133,8 +133,10 @@ public class CreatureManager : MonoBehaviour
 
             _selectedPingus.Function = Creature.CreatureFunction.BuildingBridge;
 
-            BridgeCreationBehaviour bridge = CreateBridgeAtPosition(_selectedPingus.Position, _selectedPingus.Direction, Time.time);
-            _bridgesCreating.Add(bridge);
+            //BridgeCreationBehaviour bridge = CreateBridgeAtPosition(_selectedPingus.Position, _selectedPingus.Direction, Time.time);
+            //_bridgesCreating.Add(bridge);
+
+            CreateBridgeAtPosition(_selectedPingus.Position, _selectedPingus.Direction, Time.time);
         }
     }
 
@@ -201,18 +203,18 @@ public class CreatureManager : MonoBehaviour
                 SetSelectedBuildStairsDown();
             }
 
-            List<BridgeCreationBehaviour> bridgesBuild = new List<BridgeCreationBehaviour>();
-            foreach (BridgeCreationBehaviour creatingBridge in _bridgesCreating)
-            {
-                BridgeCreationBehaviour.BuildingState state = creatingBridge.Build(Time.time);
-                if (state == BridgeCreationBehaviour.BuildingState.Done)
-                    bridgesBuild.Add(creatingBridge);
-            }
+            //List<BridgeCreationBehaviour> bridgesBuild = new List<BridgeCreationBehaviour>();
+            //foreach (BridgeCreationBehaviour creatingBridge in _bridgesCreating)
+            //{
+            //    BridgeCreationBehaviour.BuildingState state = creatingBridge.Build(Time.time);
+            //    if (state == BridgeCreationBehaviour.BuildingState.Done)
+            //        bridgesBuild.Add(creatingBridge);
+            //}
 
-            foreach (BridgeCreationBehaviour buildBridge in bridgesBuild)
-            {
-                _bridgesCreating.Remove(buildBridge);
-            }
+            //foreach (BridgeCreationBehaviour buildBridge in bridgesBuild)
+            //{
+            //    _bridgesCreating.Remove(buildBridge);
+            //}
 
 
             //Debug.Log("Handling stairs !!!");
@@ -327,19 +329,20 @@ public class CreatureManager : MonoBehaviour
         return pingusObject;
     }
 
-    BridgeCreationBehaviour CreateBridgeAtPosition(Vector3 position, Vector3 direction, float creationTime)
+    GameObject CreateBridgeAtPosition(Vector3 position, Vector3 direction, float creationTime)
     {
         GameObject bridgeObject = Instantiate(BridgePrototype);
 
-        BridgeCreationBehaviour bridge = new BridgeCreationBehaviour();
-        bridge.Bridge = bridgeObject;
-        bridge.CreationTime = creationTime;
+        Bridge bridge = bridgeObject.GetComponent<Bridge>();
+        //BridgeCreationBehaviour bridge = new BridgeCreationBehaviour();
+        //bridge.Bridge = bridgeObject;
+        //bridge.CreationTime = creationTime;
         bridge.Position = position;
         bridge.Direction = direction;
 
         bridgeObject.SetActive(true);
 
-        return bridge;
+        return bridgeObject;
     }
 
     StairCreationBehaviour CreateStairUpAtPosition(Vector3 position, Vector3 direction, float creationTime)

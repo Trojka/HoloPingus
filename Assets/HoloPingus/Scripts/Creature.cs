@@ -328,7 +328,6 @@ public class Creature : MonoBehaviour
         }
     }
 
-    // Use this for initialization
     void Start()
     {
         foreach (Transform child in this.transform)
@@ -343,7 +342,6 @@ public class Creature : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         UpdatePosture(Time.deltaTime);
