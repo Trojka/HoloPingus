@@ -49,11 +49,11 @@ public class StairCreationBehaviour
             float stairLength = timeBuilding * _buildingSpeed;
 
 
-            if (WillBumpIntoSomething(stairLength))
-            {
-                State = BuildingState.Done;
-            }
-            else
+            //if (WillBumpIntoSomething(stairLength))
+            //{
+            //    State = BuildingState.Done;
+            //}
+            //else
             {
 
                 if (stairLength >= _stairMaxLength)
@@ -78,27 +78,27 @@ public class StairCreationBehaviour
         return State;
     }
 
-    private bool WillBumpIntoSomething(float newLength)
-    {
-        float currentStairLength = Stair.transform.localScale.z;
-        float growth = newLength - currentStairLength;
-        Vector3 forwardBumpPollingPosition = _position
-            + (Mathf.Cos(_inclinationAngle) * _direction * currentStairLength)
-            + (Mathf.Sin(_inclinationAngle) * Vector3.up * currentStairLength);
-        Vector3 inclinationDirection = new Vector3(_direction.x, _direction.y, Mathf.Sin(_inclinationAngle));
-        RaycastHit forwardBumpHitInfo;
-        if (Physics.Raycast(
-            forwardBumpPollingPosition,
-            inclinationDirection,
-            out forwardBumpHitInfo,
-            growth
-            ))
-        {
-            return true;
-        }
+    //private bool WillBumpIntoSomething(float newLength)
+    //{
+    //    float currentStairLength = Stair.transform.localScale.z;
+    //    float growth = newLength - currentStairLength;
+    //    Vector3 forwardBumpPollingPosition = _position
+    //        + (Mathf.Cos(_inclinationAngle) * _direction * currentStairLength)
+    //        + (Mathf.Sin(_inclinationAngle) * Vector3.up * currentStairLength);
+    //    Vector3 inclinationDirection = new Vector3(_direction.x, _direction.y, Mathf.Sin(_inclinationAngle));
+    //    RaycastHit forwardBumpHitInfo;
+    //    if (Physics.Raycast(
+    //        forwardBumpPollingPosition,
+    //        inclinationDirection,
+    //        out forwardBumpHitInfo,
+    //        growth
+    //        ))
+    //    {
+    //        return true;
+    //    }
 
-        return false;
-    }
+    //    return false;
+    //}
 
     public Vector3 Position {
         get { return _position; }

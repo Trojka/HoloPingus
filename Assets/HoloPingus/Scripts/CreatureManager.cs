@@ -21,6 +21,7 @@ public class CreatureManager : MonoBehaviour
     public const float _endDistance = 0.05f;
 
     public static int FloorMask;
+    public static int PathModifierMask;
 
     public Camera TheMainCamera;
 
@@ -73,6 +74,7 @@ public class CreatureManager : MonoBehaviour
         HitCursor.SetActive(false);
 
         FloorMask = (1 << LAYER_FLOOR); // SpatialMappingManager.Instance.LayerMask;
+        PathModifierMask = (1 << LAYER_PATHMODIFIER);
 
         //_pathFactory.Clear();
         _walkingPinguses.Clear();
@@ -89,14 +91,14 @@ public class CreatureManager : MonoBehaviour
         //_keywordRecognizer.Start();
     }
 
-    private void KeywordRecognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
-    {
-        System.Action keywordAction;
-        if (_keywords.TryGetValue(args.text, out keywordAction))
-        {
-            keywordAction.Invoke();
-        }
-    }
+    //private void KeywordRecognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
+    //{
+    //    System.Action keywordAction;
+    //    if (_keywords.TryGetValue(args.text, out keywordAction))
+    //    {
+    //        keywordAction.Invoke();
+    //    }
+    //}
 
     private void SetSelectedToLeft()
     {
@@ -294,14 +296,20 @@ public class CreatureManager : MonoBehaviour
 
     Vector3 GetInitialMovingDirection()
     {
+        var angle = Random.Range(0f, 360.0f);
 
-        Vector3 targetPosition = new Vector3(
-            _endPosition.x,
-            _startPosition.y,
-            _endPosition.z);
+        Debug.Log(string.Format("Initial angle {0}", angle));
 
-        Vector3 movingDirection = targetPosition - _startPosition;
-        return movingDirection.normalized;
+        Vector3 movingDirection = Quaternion.Euler(0, angle, 0) * Vector3.forward;
+        return movingDirection;
+
+        //Vector3 targetPosition = new Vector3(
+        //    _endPosition.x,
+        //    _startPosition.y,
+        //    _endPosition.z);
+
+        //Vector3 movingDirection = targetPosition - _startPosition;
+        //return movingDirection.normalized;
     }
 
     GameObject CreatePingusAtPosition(Vector3 position, Vector3 direction, float creationTime)

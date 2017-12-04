@@ -35,11 +35,11 @@ public class BridgeCreationBehaviour
             float timeBuilding = atTime - CreationTime;
             float bridgeLength = timeBuilding * _buildingSpeed;
 
-            if (WillBumpIntoSomething(bridgeLength))
-            {
-                State = BuildingState.Done;
-            }
-            else
+            //if (WillBumpIntoSomething(bridgeLength))
+            //{
+            //    State = BuildingState.Done;
+            //}
+            //else
             {
 
                 if (bridgeLength >= _bridgeMaxLength)
@@ -57,26 +57,26 @@ public class BridgeCreationBehaviour
         return State;
     }
 
-    private bool WillBumpIntoSomething(float newLength)
-    {
-        float currentBridgeLength = Bridge.transform.localScale.z;
-        float growth = newLength - currentBridgeLength;
-        Vector3 forwardBumpPollingPosition = _position + (_direction * currentBridgeLength);
-        RaycastHit forwardBumpHitInfo;
-        if (Physics.Raycast(
-            forwardBumpPollingPosition,
-            _direction,
-            out forwardBumpHitInfo,
-            growth
-            ))
-        {
+    //private bool WillBumpIntoSomething(float newLength)
+    //{
+    //    float currentBridgeLength = Bridge.transform.localScale.z;
+    //    float growth = newLength - currentBridgeLength;
+    //    Vector3 forwardBumpPollingPosition = _position + (_direction * currentBridgeLength);
+    //    RaycastHit forwardBumpHitInfo;
+    //    if (Physics.Raycast(
+    //        forwardBumpPollingPosition,
+    //        _direction,
+    //        out forwardBumpHitInfo,
+    //        growth
+    //        ))
+    //    {
 
-            Debug.Log("The bridge will bump into something !");
-            return true;
-        }
+    //        Debug.Log("The bridge will bump into something !");
+    //        return true;
+    //    }
 
-        return false;
-    }
+    //    return false;
+    //}
 
     public Vector3 Position {
         get { return _position; }

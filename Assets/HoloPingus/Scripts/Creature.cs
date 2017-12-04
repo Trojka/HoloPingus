@@ -209,8 +209,7 @@ public class Creature : MonoBehaviour
         Vector3 nextPosition = this.transform.position + Direction * distanceTravelled;
         Vector3 groundPollingPosition = nextPosition + (Vector3.up * _bodyHeight);
 
-        int checkLayerMask = CreatureManager.FloorMask
-            | (1 << CreatureManager.LAYER_PATHMODIFIER);
+        int checkLayerMask = CreatureManager.FloorMask | CreatureManager.PathModifierMask;
 
         RaycastHit groundHitInfo;
         if (Physics.Raycast(
@@ -222,6 +221,8 @@ public class Creature : MonoBehaviour
         {
 
             GameObject hitObject = groundHitInfo.collider.gameObject;
+
+            //Debug.Log("Pingus hit gameobject: " + hitObject.name);
 
             //if (BridgeCreationBehaviour.IsBridge(hitObject)) {
             //    //Debug.Log("It stepped on the bridge !!!");
