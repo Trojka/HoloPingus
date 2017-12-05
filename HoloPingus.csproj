@@ -86,6 +86,7 @@
     <Compile Include="Assets\HoloPingus\Scripts\Creature.cs" />
     <Compile Include="Assets\HoloPingus\Scripts\CreatureManager.cs" />
     <Compile Include="Assets\HoloPingus\Scripts\GamePlay.cs" />
+    <Compile Include="Assets\HoloPingus\Scripts\Stair.cs" />
     <Compile Include="Assets\HoloPingus\Scripts\StairCreationBehaviour.cs" />
     <Compile Include="Assets\HoloToolkit\Input\Scripts\Cursor\AnimatedCursor.cs" />
     <Compile Include="Assets\HoloToolkit\Input\Scripts\Cursor\Cursor.cs" />

@@ -48,7 +48,7 @@ public class CreatureManager : MonoBehaviour
     Dictionary<GameObject, Creature> _walkingPinguses = new Dictionary<GameObject, Creature>();
     //Dictionary<GameObject, CreatureBehaviour> _steeringPinguses = new Dictionary<GameObject, CreatureBehaviour>();
     //List<BridgeCreationBehaviour> _bridgesCreating = new List<BridgeCreationBehaviour>();
-    List<StairCreationBehaviour> _stairsCreating = new List<StairCreationBehaviour>();
+    //List<StairCreationBehaviour> _stairsCreating = new List<StairCreationBehaviour>();
     Creature _selectedPingus;
 
     bool _startCreation = false;
@@ -149,8 +149,10 @@ public class CreatureManager : MonoBehaviour
 
             _selectedPingus.Function = Creature.CreatureFunction.BuildingStairUp;
 
-            StairCreationBehaviour stair = CreateStairUpAtPosition(_selectedPingus.Position, _selectedPingus.Direction, Time.time);
-            _stairsCreating.Add(stair);
+            //StairCreationBehaviour stair = CreateStairUpAtPosition(_selectedPingus.Position, _selectedPingus.Direction, Time.time);
+            //_stairsCreating.Add(stair);
+
+            CreateStairUpAtPosition(_selectedPingus.Position, _selectedPingus.Direction, Time.time);
         }
 
     }
@@ -164,8 +166,10 @@ public class CreatureManager : MonoBehaviour
 
             _selectedPingus.Function = Creature.CreatureFunction.BuildingStairDown;
 
-            StairCreationBehaviour stair = CreateStairDownAtPosition(_selectedPingus.Position, _selectedPingus.Direction, Time.time);
-            _stairsCreating.Add(stair);
+            //StairCreationBehaviour stair = CreateStairDownAtPosition(_selectedPingus.Position, _selectedPingus.Direction, Time.time);
+            //_stairsCreating.Add(stair);
+
+            CreateStairDownAtPosition(_selectedPingus.Position, _selectedPingus.Direction, Time.time);
         }
     }
 
@@ -219,24 +223,24 @@ public class CreatureManager : MonoBehaviour
 
             //Debug.Log("Handling stairs !!!");
 
-            List<StairCreationBehaviour> stairsBuild = new List<StairCreationBehaviour>();
-            foreach (StairCreationBehaviour creatingStair in _stairsCreating)
-            {
+            //List<StairCreationBehaviour> stairsBuild = new List<StairCreationBehaviour>();
+            //foreach (StairCreationBehaviour creatingStair in _stairsCreating)
+            //{
 
-                //Debug.Log("Handling building stair" + creatingStair.Name + " !!!");
+            //    //Debug.Log("Handling building stair" + creatingStair.Name + " !!!");
 
-                StairCreationBehaviour.BuildingState state = creatingStair.Build(Time.time);
-                if (state == StairCreationBehaviour.BuildingState.Done)
-                    stairsBuild.Add(creatingStair);
-            }
-            //Debug.Log("Removing stair !!!");
+            //    StairCreationBehaviour.BuildingState state = creatingStair.Build(Time.time);
+            //    if (state == StairCreationBehaviour.BuildingState.Done)
+            //        stairsBuild.Add(creatingStair);
+            //}
+            ////Debug.Log("Removing stair !!!");
 
-            foreach (StairCreationBehaviour buildStair in stairsBuild)
-            {
-                //Debug.Log("Handling removal of a stair !!!");
-                _stairsCreating.Remove(buildStair);
-            }
-            //Debug.Log("Handed building stairs !!!");
+            //foreach (StairCreationBehaviour buildStair in stairsBuild)
+            //{
+            //    //Debug.Log("Handling removal of a stair !!!");
+            //    _stairsCreating.Remove(buildStair);
+            //}
+            ////Debug.Log("Handed building stairs !!!");
 
 
             if ((_currentNumberOfCreatures < _maxNumberOfCreatures) && (Time.time - _lastPingusCreationTime > _pingusCreationInerval))
@@ -345,39 +349,41 @@ public class CreatureManager : MonoBehaviour
         return bridgeObject;
     }
 
-    StairCreationBehaviour CreateStairUpAtPosition(Vector3 position, Vector3 direction, float creationTime)
+    GameObject CreateStairUpAtPosition(Vector3 position, Vector3 direction, float creationTime)
     {
         GameObject stairUpObject = Instantiate(StairUpPrototype);
 
-        StairCreationBehaviour stairUp = new StairCreationBehaviour();
-        stairUp.Name = "UP";
-        stairUp.Stair = stairUpObject;
-        stairUp.CreationTime = creationTime;
+        Stair stairUp = stairUpObject.GetComponent<Stair>();
+        //StairCreationBehaviour stairUp = new StairCreationBehaviour();
+        //stairUp.Name = "UP";
+        //stairUp.Stair = stairUpObject;
+        //stairUp.CreationTime = creationTime;
         stairUp.Position = position;
-        Debug.Log("setting inclination of newly created Stair Up");
-        stairUp.Inclination = StairCreationBehaviour.InclinationDirection.Up;
+        //Debug.Log("setting inclination of newly created Stair Up");
+        //stairUp.Inclination = StairCreationBehaviour.InclinationDirection.Up;
         stairUp.Direction = direction;
 
         stairUpObject.SetActive(true);
 
-        return stairUp;
+        return stairUpObject;
     }
 
-    StairCreationBehaviour CreateStairDownAtPosition(Vector3 position, Vector3 direction, float creationTime)
+    GameObject CreateStairDownAtPosition(Vector3 position, Vector3 direction, float creationTime)
     {
         GameObject stairDownObject = Instantiate(StairDownPrototype);
 
-        StairCreationBehaviour stairDown = new StairCreationBehaviour();
-        stairDown.Name = "DOWN";
-        stairDown.Stair = stairDownObject;
-        stairDown.CreationTime = creationTime;
+        Stair stairDown = stairDownObject.GetComponent<Stair>();
+        //StairCreationBehaviour stairDown = new StairCreationBehaviour();
+        //stairDown.Name = "DOWN";
+        //stairDown.Stair = stairDownObject;
+        //stairDown.CreationTime = creationTime;
         stairDown.Position = position;
-        Debug.Log("setting inclination of newly created Stair Down");
-        stairDown.Inclination = StairCreationBehaviour.InclinationDirection.Down;
+        //Debug.Log("setting inclination of newly created Stair Down");
+        //stairDown.Inclination = StairCreationBehaviour.InclinationDirection.Down;
         stairDown.Direction = direction;
 
         stairDownObject.SetActive(true);
 
-        return stairDown;
+        return stairDownObject;
     }
 }

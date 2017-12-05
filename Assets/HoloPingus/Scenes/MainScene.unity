@@ -346,6 +346,7 @@ GameObject:
   - component: {fileID: 596416525}
   - component: {fileID: 596416524}
   - component: {fileID: 596416523}
+  - component: {fileID: 596416527}
   m_Layer: 9
   m_Name: StairDown
   m_TagString: Untagged
@@ -417,6 +418,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &596416527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 596416522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ca369c60e4e61a4aa25d5c8d2ac301a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inclination: 1
 --- !u!1 &750418622
 GameObject:
   m_ObjectHideFlags: 0
@@ -1272,6 +1285,7 @@ GameObject:
   - component: {fileID: 1838675903}
   - component: {fileID: 1838675902}
   - component: {fileID: 1838675901}
+  - component: {fileID: 1838675905}
   m_Layer: 9
   m_Name: StairUp
   m_TagString: Untagged
@@ -1343,6 +1357,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1838675905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1838675900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ca369c60e4e61a4aa25d5c8d2ac301a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inclination: 0
 --- !u!1 &1896509206
 GameObject:
   m_ObjectHideFlags: 0

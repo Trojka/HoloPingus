@@ -24,14 +24,14 @@ public class Bridge : MonoBehaviour {
         return !string.IsNullOrEmpty(gameObject.name) && gameObject.name.StartsWith(_name);
     }
 
-    public BuildingState State
-    {
-        get { return _state; }
-        set
-        {
-            _state = value;
-        }
-    }
+    //public BuildingState State
+    //{
+    //    get { return _state; }
+    //    set
+    //    {
+    //        _state = value;
+    //    }
+    //}
 
     public Vector3 Position
     {
@@ -51,11 +51,12 @@ public class Bridge : MonoBehaviour {
 
     private void Build(float timePassed)
     {
-        if (State == BuildingState.Building)
+        if (_state == BuildingState.Building)
         {
             //float timeBuilding = atTime - _creationTime;
             float bridgeGrowth = timePassed * _buildingSpeed;
-
+            float oldBridgeLength = this.transform.localScale.z;
+            float newBridgeLength = this.transform.localScale.z + bridgeGrowth;
             //if (WillBumpIntoSomething(bridgeLength))
             //{
             //    State = BuildingState.Done;
@@ -63,15 +64,16 @@ public class Bridge : MonoBehaviour {
             //else
             {
 
-                if (this.transform.localScale.z >= _bridgeMaxLength)
+                if (newBridgeLength >= _bridgeMaxLength)
                 {
                     //bridgeLength = _bridgeMaxLength;
-                    this.transform.localScale = new Vector3(this.transform.localScale.x, this.transform.localScale.y, _bridgeMaxLength);
-                    State = BuildingState.Done;
+                    newBridgeLength = _bridgeMaxLength;
+                    _state = BuildingState.Done;
                 }
 
-                this.transform.position = Position + (_direction * bridgeGrowth / 2f);
-                this.transform.localScale = new Vector3(this.transform.localScale.x, this.transform.localScale.y, this.transform.localScale.z + bridgeGrowth);
+                float finalGrowth = newBridgeLength - oldBridgeLength;
+                this.transform.position = Position + (_direction * finalGrowth / 2f);
+                this.transform.localScale = new Vector3(this.transform.localScale.x, this.transform.localScale.y, newBridgeLength);
 
             }
         }
@@ -82,6 +84,8 @@ public class Bridge : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        Debug.Log("Bridge: Start method");
+
         _state = BuildingState.Building;
         _creationTime = Time.time;
         this.transform.localScale = new Vector3(this.transform.localScale.x, this.transform.localScale.y, 0);
