@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.VR.WSA.Input;
+
 
 public class GamePlay : MonoBehaviour
 {
@@ -27,7 +27,7 @@ public class GamePlay : MonoBehaviour
 
     GameState _gameState;
 
-    GestureRecognizer _gestureRecognizer;
+    UnityEngine.XR.WSA.Input.GestureRecognizer _gestureRecognizer;
 
     float _scanTime = 10.0f;
 
@@ -44,8 +44,8 @@ public class GamePlay : MonoBehaviour
         StartPositionMarker.SetActive(false);
         EndPositionMarker.SetActive(false);
 
-        _gestureRecognizer = new GestureRecognizer();
-        _gestureRecognizer.SetRecognizableGestures(GestureSettings.Tap);
+        _gestureRecognizer = new UnityEngine.XR.WSA.Input.GestureRecognizer();
+        _gestureRecognizer.SetRecognizableGestures(UnityEngine.XR.WSA.Input.GestureSettings.Tap);
         _gestureRecognizer.TappedEvent += _gestureRecognizer_TappedEvent;
 
         //SpatialMappingManager.Instance.StartObserver();
@@ -64,7 +64,7 @@ public class GamePlay : MonoBehaviour
 
     }
 
-    private void _gestureRecognizer_TappedEvent(InteractionSourceKind source, int tapCount, Ray headRay)
+    private void _gestureRecognizer_TappedEvent(UnityEngine.XR.WSA.Input.InteractionSourceKind source, int tapCount, Ray headRay)
     {
 
         if (_gameState == GameState.PlacingStart)
