@@ -1,4 +1,4 @@
-﻿//using HoloToolkit.Unity.SpatialMapping;
+﻿using HoloToolkit.Unity.SpatialMapping;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,7 +31,7 @@ public class GamePlay : MonoBehaviour
 
     float _scanTime = 10.0f;
 
-    public static bool Testing = true;
+    public static bool Testing = false;
 
     // Use this for initialization
     void Start()
@@ -48,7 +48,7 @@ public class GamePlay : MonoBehaviour
         _gestureRecognizer.SetRecognizableGestures(UnityEngine.XR.WSA.Input.GestureSettings.Tap);
         _gestureRecognizer.TappedEvent += _gestureRecognizer_TappedEvent;
 
-        //SpatialMappingManager.Instance.StartObserver();
+        SpatialMappingManager.Instance.StartObserver();
 
         if (Testing)
         {
@@ -89,14 +89,14 @@ public class GamePlay : MonoBehaviour
     void Update()
     {
 
-        //if (Time.time - SpatialMappingManager.Instance.StartTime < _scanTime)
-        //{
-        //    Debug.Log("Keep looking around !!!");
+        if (Time.time - SpatialMappingManager.Instance.StartTime < _scanTime)
+        {
+            Debug.Log("Keep looking around !!!");
 
-        //    return;
-        //}
+            return;
+        }
 
-        //SpatialMappingManager.Instance.StopObserver();
+        SpatialMappingManager.Instance.StopObserver();
 
         if (_gameState == GameState.Scanning)
         {
@@ -106,24 +106,24 @@ public class GamePlay : MonoBehaviour
             _gameState = GameState.PlacingStart;
         }
 
-        //if (_gameState == GameState.PlacingStart
-        //    || _gameState == GameState.PlacingEnd)
-        //{
-        //    RaycastHit hitInfo;
-        //    if (Physics.Raycast(
-        //            TheMainCamera.transform.position,
-        //            TheMainCamera.transform.forward,
-        //            out hitInfo,
-        //            20.0f,
-        //            SpatialMappingManager.Instance.LayerMask))
-        //    {
-        //        Debug.Log("Something was hit");
+        if (_gameState == GameState.PlacingStart
+            || _gameState == GameState.PlacingEnd)
+        {
+            RaycastHit hitInfo;
+            if (Physics.Raycast(
+                    TheMainCamera.transform.position,
+                    TheMainCamera.transform.forward,
+                    out hitInfo,
+                    20.0f,
+                    SpatialMappingManager.Instance.LayerMask))
+            {
+                Debug.Log("Something was hit");
 
-        //        _currentPositionMarker.transform.position = hitInfo.point;
-        //        _currentPositionMarker.transform.up = hitInfo.normal;
+                _currentPositionMarker.transform.position = hitInfo.point;
+                _currentPositionMarker.transform.up = hitInfo.normal;
 
-        //    }
-        //}
+            }
+        }
 
         if (_gameState == GameState.StartPlaying)
         {

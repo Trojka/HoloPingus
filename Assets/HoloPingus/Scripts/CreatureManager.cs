@@ -262,9 +262,10 @@ public class CreatureManager : MonoBehaviour
             }
 
             Ray ray = new Ray(TheMainCamera.transform.position, TheMainCamera.transform.forward);
-            if (GamePlay.Testing)
-                ray = TheMainCamera.ScreenPointToRay(Input.mousePosition);
+            //if (GamePlay.Testing)
+            //    ray = TheMainCamera.ScreenPointToRay(Input.mousePosition);
 
+            Debug.Log("Will perform raycast");
             RaycastHit pingusHitInfo;
             if (Physics.Raycast(
                     ray
@@ -272,18 +273,19 @@ public class CreatureManager : MonoBehaviour
                     , 20.0f
                     ))
             {
+                Debug.Log("Something was hit, placing cursor");
 
                 HitCursor.transform.position = pingusHitInfo.point;
 
                 GameObject hitObject = pingusHitInfo.collider.gameObject;
-                //Debug.Log(hitObject.name);
+                Debug.Log("Something was hit: " + hitObject.name);
 
                 Creature pingus;
                 if (Creature.IsCreature(hitObject) && _walkingPinguses.TryGetValue(hitObject, out pingus))
                 {
                     pingus.State = Creature.CreatureState.Selected;
                     _selectedPingus = pingus;
-                    //Debug.Log("You hit a pingus !!!");
+                    Debug.Log("You hit a pingus !!!");
                 }
 
             }
